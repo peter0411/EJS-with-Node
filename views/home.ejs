@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title><%= Info.title %></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<%- include('partials/navbar') %>
+		<div class="mainbody row">
+			<div class="col-sm-3 obj1-panel">
+				<%- include('obj1.ejs') %>
+			</div>
+			<div class="col-sm-9 obj3-panel">
+				<%- include('obj3.ejs') %>
+			</div>
+		</div>
+		<%- include('partials/footer') %>
+	</div>
+</body>
+
+</html>

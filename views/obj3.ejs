@@ -1,0 +1,75 @@
+<%- include('obj2.ejs') %>
+<div class="obj3-mainboard">
+    <%- include('partials/item.ejs') %>
+</div>
+<div class="pagination">
+    <button type="button" class="btn btn-default" id="prevpage">&laquo;</button>
+    <button type="button" class="btn btn-default" id="nextpage">&raquo;</button>
+</div>
+
+<script>
+$(function() {
+    validateBtn();
+})
+
+$("#prevpage").click (function () {
+    var data = {status: "prev"};
+    validateBtn();
+
+    $.ajax({
+        type: "POST",
+        url: '/pagination',
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (data) {
+            console.log("success");
+        },
+        complete: function (data) {
+            console.log(data);
+            $(".obj3-panel").html(data.responseText);
+        },
+        error: function () {
+
+        }
+    });
+})
+$("#nextpage").click (function () {
+    var data = {status: "next"};
+    validateBtn();
+
+    $.ajax({
+        type: "POST",
+        url: '/pagination',
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (data) {
+            console.log("success");
+        },
+        complete: function (data) {
+            console.log(data);
+            $(".obj3-panel").html(data.responseText);
+        },
+        error: function () {
+
+        }
+    });
+})
+
+function validateBtn () {
+    var quantity = <%= Info.quantity ? Info.quantity : 0 %>
+    var pageno = <%= Info.pageno %>;
+    var reminder = quantity - pageno * 3 ;
+
+    $("#nextpage").prop('disabled', false);
+    $("#prevpage").prop('disabled', false);
+
+    if (reminder <= 3) {
+        $("#nextpage").prop('disabled', true);
+    }
+    if (pageno < 1) {
+        $("#prevpage").prop('disabled', true);
+    } 
+}
+</script>

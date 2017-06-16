@@ -1,0 +1,37 @@
+<div class="sidenav">
+    <select class="item-type form-control">
+        <option value="A" <%= Info.selected == 'A' ? "selected" : "" %>>A</option>
+        <option value="B" <%= Info.selected == 'B' ? "selected" : "" %>>B</option>
+    </select>
+</div>
+
+<script>
+$(".sidenav").click(function (event) {
+    event.stopPropagation();
+});
+$(window).click(function() {
+    $(".sidenav").removeClass("active");
+    $(".obj3-mainboard").css("opacity", "1");
+});
+
+$('.item-type').on('change', function() {
+    var data = {selectedItem: this.value};
+    $.ajax({
+        type: "POST",
+        url: '/setItemType',
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (data) {
+            console.log("success");
+        },
+        complete: function (data) {
+            console.log(data);
+            $(".obj3-panel").html(data.responseText);
+        },
+        error: function () {
+
+        }
+    });
+})    
+</script>

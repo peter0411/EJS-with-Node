@@ -1,0 +1,13 @@
+<% 
+var reminder = Info.quantity - Info.pageno * 3;
+var itemCount = (reminder < 3) ? reminder : 3;
+
+var itemText = Info.pageno * 3 + 1;
+
+for (var i = 0; i < itemCount; i ++) { 
+%>
+<div class="obj-item">
+    Item <%= Info.selected %> <%= itemText + i %>
+    <span class="num-area"><%= itemText + i %></span>
+</div>
+<% } %>
